@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Welcome</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    <title>Ornamental-Fish</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/6deb488a16.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/styles.css') }}">
+
+</head>
+
+<body style="background-color: #595B5C;">
+	<!--------------->
+	{% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %}
+	<!-- <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert" style="margin-bottom: 0;">
+		{{ message }}
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	  </div> -->
+	<div aria-live="polite" aria-atomic="true" class="position-relative d-flex justify-content-center align-items-center h-100">
+		<div class="toast-container p-3" style="z-index: 5; color:white;">
+			<div id="liveToast" class="toast fade show bg-{{ category }}" role="alert" aria-live="assertive" aria-atomic="true">
+				<div class="toast-body text-center" style="z-index: 5; color:white;">
+					{{ message }}
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endfor %} {% endif %} {% endwith %}
+	<div class="position-absolute top-50 start-50 translate-middle">
+		<div class="card shadow-lg bg-body rounded" style="width: 305px;">
+			<div class="card-header bg-dark text-center">
+				<h4 class="text-white">เข้าสู่ระบบ</h4>
+			</div>
+			<form action="/login" method="POST">
+				<div class="card-body">
+					<div class="row g-1">
+						<div class="col-12">
+							<div class="row align-items-center">
+								<div class="col-4">
+									<p>ชื่อผู้ใช้งาน</p>
+								</div>
+								<div class="col-8">
+									<input name="username" class="form-control" type="text" aria-label="default input">
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="row align-items-center">
+								<div class="col-4">
+									<p>รหัสผ่าน</p>
+								</div>
+								<div class="col-8">
+									<input name="password" class="form-control" type="password" aria-label="default input">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer">
+					<div class="row">
+						<div class="col-12 text-end">
+							<button class="btn btn-primary">เข้าสู่ระบบ</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<!--------------->
+</body>
+
+</html>

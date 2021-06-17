@@ -1,0 +1,186 @@
+{% extends "header.html" %}
+
+{% block content %}
+<div class="container pr-2 pt-1 pl-2 my-0"> 
+  <div class="card p-1 my-0 text-dark" >
+    <div class="card-header bg-dark text-center">
+      <h4 style="color: white;">ผลการค้นหาร้านค้า</h4>
+    </div>
+    <div class="card-body">
+      <div class="row g-1">
+        <div class="col-12 text-end">
+          <div class="col-12 text-end">
+            <div class="mx-auto">
+              <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fishdata">ข้อมูลปลา</a>
+              <div class="modal fade" id="fishdata" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">ข้อมูลปลา</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-12 text-center">
+                          <img src="{{search_fish_data[0][6]}}" class="card-img-top" style="width:70%;"/>
+                        </div>
+                        <div class="card text-start">
+                          <div class="card-body">
+                          <div class="row g-1">
+                            <div class="col-12">
+                              <div class="row">
+                                <div class="col-2">
+                                  <span>
+                                    ชื่อปลา :
+                                  </span>
+                                </div>
+                                <div class="col-10 text-start">
+                                  <span>
+                                    {% for row in search_fish_data %}
+                                      {{row.1}}
+                                    {% endfor %}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="row">
+                                <div class="col-2">
+                                  <span>
+                                    ชื่อสามัญ : 
+                                  </span>
+                                </div>
+                                <div class="col-10 text-start">
+                                  <span>
+                                    {{search_fish_data[0][2]}}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="row">
+                                <div class="col-2">
+                                  <span>
+                                    รายละเอียด : 
+                                  </span>
+                                </div>
+                                <div class="col-10 text-start">
+                                  <span>
+                                    {{search_fish_data[0][3]}}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="row">
+                                <div class="col-2">
+                                  <span>
+                                    อาหาร : 
+                                  </span>
+                                </div>
+                                <div class="col-10 text-start">
+                                  <span>
+                                    {{search_fish_data[0][4]}}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-12">
+                              <div class="row">
+                                <div class="col-2">
+                                  <span>
+                                    การจัดตู้ปลา : 
+                                  </span>
+                                </div>
+                                <div class="col-10 text-start">
+                                  <span>
+                                    {{search_fish_data[0][5]}}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ปิด</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <a class="btn btn-primary" style="color:white;" href="{{ url_for('fishclassification_search') }}">ค้นหาใหม่</a>
+            </div>
+          </div>
+        </div>
+        {%for row in fish_product_list %}
+        <div class="col-xs-3 col-sm-3 col-md-3 mb-3">
+            <div class="card h-100">
+                <img src="{{row.6}}" class="card-img-top">
+                <div class="card-body">
+                  <ul class="nav flex-column">
+                    <li class="nav-item">
+                      <h5 class="card-title">{{row.1}}</h5>
+                    </li>
+                    <li class="nav-item">
+                      <p class="card-text">ราคา : {{row.3}} บาท</p>
+                    </li>
+                    <li class="nav-item">
+                      <p class="card-text">จำนวนคงเหลือ : {{row.4}} ตัว</p>
+                    </li>
+                  </ul>
+                </div>
+                <div class="card-footer">
+                    <div class="d-grid gap-2">
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#fishdetail{{row.0}}" class="btn btn-warning">รายละเอียด</button>
+                    </div>
+                </div>
+                <div class="modal fade" id="fishdetail{{row.0}}" tabindex="-1" aria-labelledby="fishdetail{{row.0}}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <img src="../{{row.6}}" class="card-img-top" />
+                            </div>
+                            <div class="modal-body">
+                                <h5>รายละเอียด</h5>
+                                <p>{{row.5}}</p>
+                            </div>
+                            <div class="modal-footer ">
+                                <div class="">
+                                    <button type="button" class=" btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#fishorder{{row.0}}" class="btn btn-warning">สั่งซื้อ</button>
+                                    <button type="button" class=" btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="fishorder{{row.0}}" tabindex="-1" aria-labelledby="fishorder{{row.0}}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="{{ url_for('add_basket_fish') }}" method="POST">
+                                <div class="modal-header">
+                                    <h5>สั่งซื้อ</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <label>จำนวนที่ต้องการ : </label>
+                                    <input type="text" name="count" value="" required>
+                                    <input type="hidden" name="fish_id" value="{{row.0}}"/>
+                                </div>
+                                <div class="modal-footer ">
+                                    <div class="">
+                                        <button type="submit" class=" btn btn-primary">ยืนยันสั่งซื้อ</button>
+                                        <button type="button" class=" btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%endfor%} {{fish_pagination.links}}
+  </div>
+</div>
+
+{% endblock %}

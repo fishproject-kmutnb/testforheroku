@@ -1,0 +1,697 @@
+{% extends "header_seller.html" %} {% block content %}
+
+<head>
+    <style>
+
+        .image-preview{
+            min-width: 300px;
+            max-width: 300px;
+            min-height: 100px;
+            border: 2px solid #dddddd;
+            margin-top: 15px;
+
+            /*Default text*/
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #cccccc;
+            margin-left: auto; 
+            margin-right: auto;
+        }
+        .image-preview__image{
+            display: none;
+            width: 100%;
+
+        }
+
+        .custom-button{
+            padding: 3px;
+            color:white;
+            background-color: #009578;
+            /* border: 1px solid #007; */
+            border-radius: 5px;
+            cursor: pointer;
+            
+        }
+
+        #custom-button.hover{
+            background-color:#00b28f;
+        }
+
+        #custom-text{
+            margin-left: 10px;
+            font-family:sans-serif;
+            color: 
+            #aaa;
+        }
+    </style>
+
+    <link rel="stylesheet" href="http://jqueryvalidation.org/files/demo/site-demos.css">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+    <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+    <script type="application/x-javascript">
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- image input -->
+    <script>
+        function fishreadURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $("#fishpic")
+                        .attr("src", e.target.result)
+                        // .width(200)
+                        // .height(200);
+                    $("#fishpic").show()
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function decorationreadURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $("#decpic")
+                        .attr("src", e.target.result)
+                        // .width(200)
+                        // .height(200);
+                    $("#decpic").show()
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function toolreadURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $("#toolpic")
+                        .attr("src", e.target.result)
+                        // .width(200)
+                        // .height(200);
+                    $("#toolpic").show()
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function editprofilereadURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $("#profilepic")
+                        .attr("src", e.target.result)
+                        // .width(300)
+                        // .height(300);
+                    $("#profilepic").show()
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+    <!-- validate -->
+    <script>
+        $(function() {
+            var modal_editprofile = $("#modal_editprofile").validate({
+                rules: {
+                    username: {
+                        required: true
+                    },
+                    firstname: {
+                        required: true
+                    },
+                    lastname: {
+                        required: true
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    telephone: {
+                        required: true,
+                        number: true,
+                        maxlength: 10,
+                        minlength: 10
+                    },
+                    seller_Storename: {
+                        required: true,
+                    },
+                    address: {
+                        required: true
+                    }
+                },
+                messages: {
+                    username: {
+                        required: "กรุณากรอกชื่อผู้ใช้งาน",
+                    },
+                    firstname: {
+                        required: "กรุณากรอกชื่อของท่าน",
+                    },
+                    lastname: {
+                        required: "กรุณากรอกนามสกุลของท่าน",
+                    },
+                    email: {
+                        required: "กรุณากรอกอีเมลของท่าน",
+                        email: "กรุณากรอกอีเมลให้ถูกต้อง"
+                    },
+                    telephone: {
+                        required: "กรุณากรอกเบอร์โทรศัพท์ของท่าน",
+                        number: "กรุณากรอกเบอร์ให้ถูกต้อง",
+                        maxlength: "กรุณากรอกเบอร์ให้ถูกต้อง",
+                        minlength: "กรุณากรอกเบอร์โทรศัพท์ให้ครบ"
+                    },
+                    seller_Storename: {
+                        required: "กรุณากรอกชื่อร้านค้าของท่าน",
+                    },
+                    address: {
+                        required: "กรุณากรอกที่อยู่ของท่าน"
+                    }
+                }
+            });
+            $("#canceleditprofile").click(function() {
+                console.log("OK")
+                modal_editprofile.resetForm();
+            });
+        });
+    </script>
+    <script>
+        $(function() {
+            var modal_picprofile = $("#modal_picprofile").validate({
+                rules: {
+                    seller_pic: {
+                        required: true,
+                    }
+                },
+                messages: {
+                    seller_pic: {
+                        required: "กรุณาใส่รูปภาพโปรไฟล์"
+                    }
+                }
+            });
+            $("#cancelpicprofile").click(function() {
+                console.log("OK")
+                modal_picprofile.resetForm();
+            });
+        });
+    </script>
+        <script>
+            $(function() {
+                var modal_slip = $("#modal_slip").validate({
+                    rules: {
+                        slip_pic: {
+                            required: true,
+                        }
+                    },
+                    messages: {
+                        slip_pic: {
+                            required: "กรุณาใส่รูปภาพสลิป"
+                        }
+                    }
+                });
+                $("#cancelslip").click(function() {
+                    console.log("OK")
+                    modal_picprofile.resetForm();
+                });
+            });
+        </script>
+    <script>
+        $(function() {
+            var modal_addfish = $("#modal_addfish").validate({
+                rules: {
+                    fish_name: {
+                        required: true
+                    },
+                    fish_price: {
+                        required: true,
+                        number: true
+                    },
+                    fish_amount: {
+                        required: true,
+                        number: true,
+                    },
+                    fish_pic: {
+                        required: true,
+                    }
+                },
+                messages: {
+                    fish_name: {
+                        required: "กรุณากรอกชื่อสินค้า",
+                    },
+                    fish_price: {
+                        required: "กรุณากรอกราคา",
+                        number: "กรุณากรอกเป็นตัวเลข",
+                    },
+                    fish_amount: {
+                        required: "กรุณากรอกจำนวน",
+                        number: "กรุณากรอกเป็นตัวเลข",
+                    },
+                    fish_pic: {
+                        required: "กรุณาใส่รูปภาพประกอบ"
+                    }
+                }
+            });
+            $("#canceladdfish").click(function() {
+                console.log("OK")
+                modal_addfish.resetForm();
+            });
+        });
+    </script>
+    <script>
+        $(function() {
+            var modal_adddec = $("#modal_adddec").validate({
+                rules: {
+                    dec_name: {
+                        required: true
+                    },
+                    dec_price: {
+                        required: true,
+                        number: true
+                    },
+                    dec_amount: {
+                        required: true,
+                        number: true,
+                    },
+                    dec_pic: {
+                        required: true,
+                    }
+                },
+                messages: {
+                    dec_name: {
+                        required: "กรุณากรอกชื่อสินค้า",
+                    },
+                    dec_price: {
+                        required: "กรุณากรอกราคา",
+                        number: "กรุณากรอกเป็นตัวเลข",
+                    },
+                    dec_amount: {
+                        required: "กรุณากรอกจำนวน",
+                        number: "กรุณากรอกเป็นตัวเลข",
+                    },
+                    dec_pic: {
+                        required: "กรุณาใส่รูปภาพประกอบ"
+                    }
+                }
+            });
+            $("#canceladddec").click(function() {
+                console.log("OK")
+                modal_adddec.resetForm();
+            });
+        });
+    </script>
+    <script>
+        $(function() {
+            var modal_addtool = $("#modal_addtool").validate({
+                rules: {
+                    tool_name: {
+                        required: true
+                    },
+                    tool_price: {
+                        required: true,
+                        number: true
+                    },
+                    tool_amount: {
+                        required: true,
+                        number: true,
+                    },
+                    tool_pic: {
+                        required: true,
+                    }
+                },
+                messages: {
+                    tool_name: {
+                        required: "กรุณากรอกชื่อสินค้า",
+                    },
+                    tool_price: {
+                        required: "กรุณากรอกราคา",
+                        number: "กรุณากรอกเป็นตัวเลข",
+                    },
+                    tool_amount: {
+                        required: "กรุณากรอกจำนวน",
+                        number: "กรุณากรอกเป็นตัวเลข",
+                    },
+                    tool_pic: {
+                        required: "กรุณาใส่รูปภาพประกอบ"
+                    }
+                }
+            });
+            $("#canceladdtool").click(function() {
+                console.log("OK")
+                modal_adddec.resetForm();
+            });
+        });
+    </script>
+    <script>
+        window.setTimeout(function() {
+            $(".toast").fadeTo(500, 0).slideUp(500, function() {
+                $(this).remove();
+            });
+        }, 3000);
+    </script>
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/styles.css') }}">
+</head>
+<div class="container p-1 my-0" >
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %}
+    <!-- <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert" style="margin-bottom: 0;">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div> -->
+    <div aria-live="polite" aria-atomic="true" class="bg-dark position-relative">
+        <div class="toast-container position-absolute p-3 top-0 start-50 translate-middle-x" style="z-index: 5; color:white;">
+            <div id="liveToast" class="toast fade show bg-{{ category }}" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-body text-center" style="z-index: 5; color:white;">
+                    {{ message }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %} {% endif %} {% endwith %}
+</div>
+<div class="container my-0 " style="padding-left: 0; padding-right: 0;">
+    <div class="card p-1 bg-light text-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom justify-content-center p-1">
+            <h4 style="color: white;">
+                <i style="color: white;" class="fas fa-user"></i> ข้อมูลส่วนตัว
+                <i style="color: white;" class="fas fa-user"></i>
+            </h4>
+        </nav>
+        <div class="card-body row gx-0 gy-1">
+            <div class="col-xs-12 col-md-6">
+                <div class="row p-1">
+                    <div class="col-12">
+                        <img src="{{seller_data[9]}}" style="width: 50%; height:50; display: block; margin-left: auto; margin-right: auto;">
+                    </div>
+                    <div class="col-12">
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#pic_profile" data-bs-whatever="@getbootstrap" class="btn btn-primary" style="width: 50%; height:50; display: block; margin-left: auto; margin-right: auto;">เปลี่ยนรูปโปรไฟล์</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <div class="row gy-1">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-4">
+                                <p>ชื่อผู้ใช้งาน</p>
+                            </div>
+                            <div class="col-8">
+                                <p>:{{seller_data[0]}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-4">
+                                <p>ชื่อ-สกุล</p>
+                            </div>
+                            <div class="col-8">
+                                <p>:{{seller_data[1]}} {{seller_data[2]}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-4">
+                                <p>อีเมล</p>
+                            </div>
+                            <div class="col-8">
+                                <p>:{{seller_data[3]}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-4">
+                                <p>เบอร์โทรศัพท์</p>
+                            </div>
+                            <div class="col-8">
+                                <p>:{{seller_data[5]}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-4">
+                                <p>ที่อยู่</p>
+                            </div>
+                            <div class="col-8">
+                                <p>:{{seller_data[4]}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row ">
+                                    <div class="col-md-12 ">
+                                        <div class="mx-auto text-end">
+                                            <a class="btn btn-primary" href="/sell_history">
+                                                ประวัติการขาย
+                                            </a>
+                                            <a class="btn btn-primary" href="/buy_history">
+                                                ประวัติการซื้อ
+                                            </a>
+                                            <a class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#editprofile">
+                                                แก้ไขข้อมูล
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal fade" id="pic_profile" data-bs-backdrop="static" tabindex="-1" aria-labelledby="pic_profile" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header p-2">
+                        <p class="modal-title" id="exampleModalLabel">เปลี่ยนรูปโปรไฟล์</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{url_for('pic_profile')}}" id="modal_picprofile" method="POST" enctype="multipart/form-data">
+                        <div class="modal-body p-1">
+                            <div class="row gy-1">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label>รูปโปรไฟล์</label>
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="file" class="form-input" name="seller_pic" id="file" onchange="editprofilereadURL(this);" style="border:none" required/>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row justify-content-center">
+                                                <!-- <img id="blah" src="static\images\photo-2.png" class="form-control" alt="no image" style="width:250px"/> -->
+                                                <img id="profilepic" title="No image" class="form-control " alt="no image" style="width:350px;display: none;" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer p-0">
+                            <input class="btn btn-primary" type="submit" align="left" value="ยืนยัน"></input>
+                            <button id="cancelpicprofile" type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="editprofile" data-bs-backdrop="static" tabindex="-1" aria-labelledby="editprofile" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header p-2">
+                        <p class="modal-title" id="exampleModalLabel">แก้ไขข้อมูล</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{url_for('edit_profile')}}" id="modal_editprofile" method="POST" enctype="multipart/form-data">
+                        <div class="modal-body p-1">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <div class="row gy-1 ">
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-4 align-self-center">
+                                                    <p>ชื่อผู้ใช้งาน</ย>
+                                                </div>
+                                                <div class="col-8">
+                                                    <input name="username" id="username" class="form-control" type="text" aria-label="default input" value="{{seller_data[0]}}" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-4 align-self-center">
+                                                    <p>ชื่อ</p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <input name="firstname" id="firstname" class="form-control" type="text" aria-label="default input" value="{{seller_data[1]}}" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-4 align-self-center">
+                                                    <p>นามสกุล</p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <input name="lastname" id="lastname" class="form-control" type="text" aria-label="default input" value="{{seller_data[2]}}" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-4 align-self-center">
+                                                    <p>อีเมล</p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <input name="email" id="email" class="form-control" type="text" aria-label="default input" value="{{seller_data[3]}}" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-4 align-self-center">
+                                                    <p>ที่อยู่</p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <input name="address" id="address" class="form-control" type="text" aria-label="default input" value="{{seller_data[4]}}" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-4 align-self-center">
+                                                    <p>เบอร์โทรศัพท์</p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <input name="telephone" id="telephone" class="form-control" type="text" aria-label="default input" value="{{seller_data[5]}}" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-4 align-self-center">
+                                                    <p>Facebook</p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <input name="seller_Facebook" id="seller_Facebook" class="form-control" type="text" aria-label="default input" value="{{seller_data[7]}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-4 align-self-center">
+                                                    <p>Line</p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <input name="seller_Line" id="seller_Line" class="form-control" type="text" aria-label="default input" value="{{seller_data[6]}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-4 align-self-center">
+                                                    <p>ชื่อร้านค้า</p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <input name="seller_Storename" id="seller_Storename" class="form-control" type="text" aria-label="default input" value="{{seller_data[8]}}" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-4 align-self-center">
+                                                    <p>เปลี่ยนรหัสผ่าน</p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#change_password" data-bs-dismiss="modal">เปลี่ยนรหัสผ่าน</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer p-0">
+                            <input class="btn btn-primary" type="submit" align="left" value="ยืนยัน"></input>
+                            <button id="canceleditprofile" type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="change_password" data-bs-backdrop="static" tabindex="-1" aria-labelledby="change_password" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header p-2">
+                        เปลี่ยนรหัสผ่าน
+                    </div>
+                    <form action="{{url_for('change_password')}}" id="modal_changepassword" method="POST">
+                        <div class="modal-body p-1">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <div class="row gy-1 ">
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-4 align-self-center">
+                                                    <p>รหัสผ่านเก่า</ย>
+                                                </div>
+                                                <div class="col-8">
+                                                    <input name="old_password" id="old_password" class="form-control" type="text" aria-label="default input" value="" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-4 align-self-center">
+                                                    <p>รหัสผ่านใหม่</ย>
+                                                </div>
+                                                <div class="col-8">
+                                                    <input name="password" id="password" class="form-control" type="text" aria-label="default input"
+                                                        value="" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-4 align-self-center">
+                                                    <p>ยืนยันรหัสผ่าน</ย>
+                                                </div>
+                                                <div class="col-8">
+                                                    <input name="confirm_password" id="confirm_password" class="form-control" type="text" aria-label="default input"
+                                                        value="" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer p-1">
+                            <div class=" text-end">
+                                <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#editprofile" data-bs-dismiss="modal">กลับไปก่อนหน้า</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

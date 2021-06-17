@@ -1,0 +1,94 @@
+{% extends "header_seller.html" %}
+
+{% block content %}
+<div class="container p-1 my-0">
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %}
+    <!-- <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert" style="margin-bottom: 0;">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div> -->
+    <div aria-live="polite" aria-atomic="true" class="bg-dark position-relative">
+        <div class="toast-container position-absolute p-3 top-0 start-50 translate-middle-x" style="z-index: 5; color:white;">
+            <div id="liveToast" class="toast fade show bg-{{ category }}" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-body text-center" style="z-index: 5; color:white;">
+                    {{ message }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %} {% endif %} {% endwith %}
+</div>
+
+<div class="container p-2">
+    <div class="card p-0 bg-light text-dark">
+        <div class="card-header bg-dark gx-1">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <h4 class="ms-2" style="color: rgb(235, 227, 227);">อุปกรณ์ตกแต่ง</h4>
+                    </li> 
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <form class="d-flex" action="tool_product_search" method="POST">                 
+                            <input class="mx-2 form-control" type="search" id="search" name="search" placeholder="ค้นหาสินค้า" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>                                     
+                        </form>  
+                    </li> 
+                </ul>             
+            </nav>
+        </div>
+        <div class="card-body">
+            <div class="row g-2">
+            {%for row in accessories %}
+                <div class="col-md-3 mb-3">
+                    <div class="card h-100">                           
+                        <img src={{row.5}} class="card-img-top" width="80px" height="220px">                                                                       
+                        <div class="card-body">
+                            <h5 class="card-title">{{row.1}}</h5>
+                            <p class="card-text">ราคา : {{row.2}} บาท</p> 
+                            <p class="card-text">จำนวนคงเหลือ : {{row.3}} ชิ้น</p>                                
+                            <p class="card-text">ผู้ขาย :
+                                <a href="/shop_fish/{{row.6}}" style="color: rgb(4, 4, 255);"><b>{{row.8}}</b></a>
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-warning myBtn" data-bs-toggle="modal" data-bs-target="#buy_product{{row.0}}">สั่งซื้อ
+                                </button>
+                            </div>
+                        </div> 
+                    </div>                                                  
+                    <div class="modal fade" id="buy_product{{row.0}}" data-bs-backdrop="static" tabindex="-1" aria-labelledby="buy_product{{row.0}}" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <form action="add_basket_accessories" method="POST">
+                                    <div class="modal-header">
+                                        <img src={{row.5}} class="card-img-top" width="80px" height="220px">        
+                                    </div>
+                                    <div class="modal-body">
+                                        <h4 class="p-2">{{row.1}}</h4>                                                                    
+                                        <h6 class="text-dark">{{row.4}}</h6>
+                                        <h6 class="text-dark">ราคา {{row.2}} บาท</h6>
+                                        <label>จำนวนที่ต้องการ :</label>
+                                        <input type="text" name="count" value="" required>
+                                        <input type="hidden" name="accessories_id" value="{{row.0}}"/>
+                                    </div>                            
+                                    <div class="modal-footer p-0">
+                                        <button type="submit" class="btn btn-primary">เพิ่มในตะกร้า</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {%endfor%}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

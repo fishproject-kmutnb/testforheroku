@@ -1,0 +1,650 @@
+{% extends "header_seller.html" %} {% block content %}
+
+<head>
+    <link rel="stylesheet" href="http://jqueryvalidation.org/files/demo/site-demos.css">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+    <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+    <script type="application/x-javascript">
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/styles.css') }}">
+    <script>
+        function fishreadURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $("#fishpic")
+                        .attr("src", e.target.result)
+                        // .width(200)
+                        // .height(200);
+                    $("#fishpic").show()
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function decorationreadURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $("#decpic")
+                        .attr("src", e.target.result)
+                        // .width(200)
+                        // .height(200);
+                    $("#decpic").show()
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function toolreadURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $("#toolpic")
+                        .attr("src", e.target.result)
+                        // .width(200)
+                        // .height(200);
+                    $("#toolpic").show()
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function editprofilereadURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $("#profilepic")
+                        .attr("src", e.target.result)
+                        // .width(300)
+                        // .height(300);
+                    $("#profilepic").show()
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+    <script>
+        $(function() {
+            var modal_addfish = $("#modal_addfish").validate({
+                rules: {
+                    fish_name: {
+                        required: true
+                    },
+                    fish_price: {
+                        required: true,
+                        number: true
+                    },
+                    fish_amount: {
+                        required: true,
+                        number: true,
+                    },
+                    fish_pic: {
+                        required: true,
+                    }
+                },
+                messages: {
+                    fish_name: {
+                        required: "กรุณากรอกชื่อสินค้า",
+                    },
+                    fish_price: {
+                        required: "กรุณากรอกราคา",
+                        number: "กรุณากรอกเป็นตัวเลข",
+                    },
+                    fish_amount: {
+                        required: "กรุณากรอกจำนวน",
+                        number: "กรุณากรอกเป็นตัวเลข",
+                    },
+                    fish_pic: {
+                        required: "กรุณาใส่รูปภาพประกอบ"
+                    }
+                }
+            });
+            $("#canceladdfish").click(function() {
+                console.log("OK")
+                modal_addfish.resetForm();
+            });
+        });
+    </script>
+    <script>
+        $(function() {
+            var modal_adddec = $("#modal_adddec").validate({
+                rules: {
+                    dec_name: {
+                        required: true
+                    },
+                    dec_price: {
+                        required: true,
+                        number: true
+                    },
+                    dec_amount: {
+                        required: true,
+                        number: true,
+                    },
+                    dec_pic: {
+                        required: true,
+                    }
+                },
+                messages: {
+                    dec_name: {
+                        required: "กรุณากรอกชื่อสินค้า",
+                    },
+                    dec_price: {
+                        required: "กรุณากรอกราคา",
+                        number: "กรุณากรอกเป็นตัวเลข",
+                    },
+                    dec_amount: {
+                        required: "กรุณากรอกจำนวน",
+                        number: "กรุณากรอกเป็นตัวเลข",
+                    },
+                    dec_pic: {
+                        required: "กรุณาใส่รูปภาพประกอบ"
+                    }
+                }
+            });
+            $("#canceladddec").click(function() {
+                console.log("OK")
+                modal_adddec.resetForm();
+            });
+        });
+    </script>
+    <script>
+        $(function() {
+            var modal_addtool = $("#modal_addtool").validate({
+                rules: {
+                    tool_name: {
+                        required: true
+                    },
+                    tool_price: {
+                        required: true,
+                        number: true
+                    },
+                    tool_amount: {
+                        required: true,
+                        number: true,
+                    },
+                    tool_pic: {
+                        required: true,
+                    }
+                },
+                messages: {
+                    tool_name: {
+                        required: "กรุณากรอกชื่อสินค้า",
+                    },
+                    tool_price: {
+                        required: "กรุณากรอกราคา",
+                        number: "กรุณากรอกเป็นตัวเลข",
+                    },
+                    tool_amount: {
+                        required: "กรุณากรอกจำนวน",
+                        number: "กรุณากรอกเป็นตัวเลข",
+                    },
+                    tool_pic: {
+                        required: "กรุณาใส่รูปภาพประกอบ"
+                    }
+                }
+            });
+            $("#canceladdtool").click(function() {
+                console.log("OK")
+                modal_adddec.resetForm();
+            });
+        });
+    </script>
+        <script>
+            $(function() {
+                var modal_addtool = $("#modal_edit_tool").validate({
+                    rules: {
+                        edit_name: {
+                            required: true
+                        },
+                        edit_price: {
+                            required: true,
+                            number: true
+                        },
+                        tool_amount: {
+                            required: true,
+                            number: true,
+                        },
+                        edit_pic: {
+                            required: true,
+                        }
+                    },
+                    messages: {
+                        edit_name: {
+                            required: "กรุณากรอกชื่อสินค้า",
+                        },
+                        edit_price: {
+                            required: "กรุณากรอกราคา",
+                            number: "กรุณากรอกเป็นตัวเลข",
+                        },
+                        tool_amount: {
+                            required: "กรุณากรอกจำนวน",
+                            number: "กรุณากรอกเป็นตัวเลข",
+                        },
+                        edit_pic: {
+                            required: "กรุณาใส่รูปภาพประกอบ"
+                        }
+                    }
+                });
+                $("#canceladdtool").click(function() {
+                    console.log("OK")
+                    modal_adddec.resetForm();
+                });
+            });
+        </script>
+    <script>
+        window.setTimeout(function() {
+            $(".toast").fadeTo(500, 0).slideUp(500, function() {
+                $(this).remove();
+            });
+        }, 3000);
+    </script>
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/styles.css') }}">
+</head>
+<div class="container-fluid p-1 my-1">
+    <div class="container p-1 my-0">
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %}
+        <div aria-live="polite" aria-atomic="true" class="bg-dark position-relative">
+            <div class="toast-container position-absolute p-3 top-0 start-50 translate-middle-x" style="z-index: 5; color:white;">
+                <div id="liveToast" class="toast fade show bg-{{ category }}" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-body text-center" style="z-index: 5; color:white;">
+                        {{ message }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %} {% endif %} {% endwith %}
+    </div>
+    <div class="row g-3">
+        <div class="col-12 ">
+            <ul class="nav justify-content-end">
+                <li class="nav-item dropdown">
+                    <a class="nav-link active dropdown-toggle btn btn-secondary" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">เพิ่มสินค้า</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#add_fish">สินค้าปลา</a></li>
+                        <li><a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#add_decoration">อุปกรณ์ตกแต่ง</a></li>
+                        <li><a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#add_tool">อุปกรณ์ตู้ปลา</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="modal fade" id="add_fish" data-bs-backdrop="static" tabindex="-1" aria-labelledby="add_fish" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header p-2">
+                        <p class="modal-title" id="add_fish">เพิ่มสินค้าปลา</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form class="form-horizontal" id="modal_addfish" action="{{url_for('add_fish')}}" method="POST" enctype="multipart/form-data">
+                        <div class="modal-body p-1">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <div class="row gy-1">
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-4 align-self-center">
+                                                    <p>ชื่อปลา</p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <input id="fish_name" name="fish_name" class="form-control" type="text" aria-label="default input" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-4 align-self-center">
+                                                    <p>ราคา</p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <input id="fish_price" name="fish_price" class="form-control" type="text" aria-label="default input" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-4 align-self-center">
+                                                    <p>จำนวน</p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <input id="fish_amount" name="fish_amount" class="form-control" type="text" aria-label="default input" value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <p>รายละเอียดสินค้า</p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <textarea name="fish_description" class="form-control" type="text" aria-label="default input" value=""></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-4 align-self-center">
+                                                    <p>รูปสินค้า</p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <input id="fish_pic" type="file" class="form-input" name="fish_pic" onchange="fishreadURL(this);" required style="border:none" />
+                                                </div>
+                                                <div class="col-12 seller_pic">
+                                                    <div class="row justify-content-center">
+                                                        <!-- <img id="blah" src="static\images\photo-2.png" class="form-control" alt="no image" style="width:250px"/> -->
+                                                        <img id="fishpic" title="No image" class="form-control " alt="no image" style="width:350px;display: none;" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer p-0">
+                            <input class="btn btn-primary" type="submit" value="ยืนยัน"></input>
+                            <button id="canceladdfish" type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="add_decoration" data-bs-backdrop="static" tabindex="-1" aria-labelledby="add_decoration" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header p-2">
+                        <p class="modal-title" id="add_decoration">เพิ่มอุปกรณ์ตกแต่ง</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form class="form-horizontal" id="modal_adddec" action="{{url_for('add_decoration')}}" method="POST" enctype="multipart/form-data">
+                        <div class="modal-body p-1">
+                            <div class="row gy-1">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-4 align-self-center">
+                                            <p>ชื่อสินค้า</p>
+                                        </div>
+                                        <div class="col-8">
+                                            <input id="dec_name" name="dec_name" class="form-control" type="text" aria-label="default input" value="" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <p>ราคา</p>
+                                        </div>
+                                        <div class="col-8">
+                                            <input id="dec_price" name="dec_price" class="form-control" type="text" aria-label="default input" value="" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <p>จำนวน</p>
+                                        </div>
+                                        <div class="col-8">
+                                            <input id="dec_amount" name="dec_amount" class="form-control" type="text" aria-label="default input" value="" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <p>รายละเอียดสินค้า</p>
+                                        </div>
+                                        <div class="col-8">
+                                            <textarea id="dec_description" name="dec_description" class="form-control" type="text" aria-label="default input" value=""></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <p>รูปสินค้า</p>
+                                        </div>
+                                        <div class="col-8">
+                                            <input id="dec_pic" type="file" class="form-input" name="dec_pic" onchange="decorationreadURL(this);" required style="border:none" />
+                                        </div>
+
+                                        <div class="col-12 seller_pic">
+                                            <div class="row justify-content-center">
+                                                <!-- <img id="blah" src="static\images\photo-2.png" class="form-control" alt="no image" style="width:250px"/> -->
+                                                <img id="decpic" title="No image" class="form-control " alt="no image" style="width:350px;display: none;" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer p-0">
+                            <input class="btn btn-primary" type="submit" align="left" value="ยืนยัน"></input>
+                            <button id="canceladddec" type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="add_tool" data-bs-backdrop="static" tabindex="-1" aria-labelledby="add_tool" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header p-2">
+                        <p class="modal-title" id="add_tool">เพิ่มอุปกรณ์ตู้ปลา</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{url_for('add_tool')}}" id="modal_addtool" method="POST" enctype="multipart/form-data">
+                        <div class="modal-body p-1">
+                            <div class="row gy-1">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-4 align-self-center">
+                                            <p>ชื่อสินค้า</p>
+                                        </div>
+                                        <div class="col-8">
+                                            <input name="tool_name" class="form-control" type="text" aria-label="default input" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <p>ราคา</p>
+                                        </div>
+                                        <div class="col-8">
+                                            <input name="tool_price" class="form-control" type="text" aria-label="default input" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <p>จำนวน</p>
+                                        </div>
+                                        <div class="col-8">
+                                            <input name="tool_amount" class="form-control" type="text" aria-label="default input" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <p>รายละเอียดสินค้า</p>
+                                        </div>
+                                        <div class="col-8">
+                                            <textarea name="tool_description" class="form-control" type="text" aria-label="default input" value=""></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <p>รูปสินค้า</p>
+                                        </div>
+                                        <div class="col-8">
+                                            <input id="tool_pic" type="file" class="form-input" name="tool_pic" onchange="toolreadURL(this);" required style="border:none" />
+                                        </div>
+
+                                        <div class="col-12 seller_pic">
+                                            <div class="row justify-content-center">
+                                                <!-- <img id="blah" src="static\images\photo-2.png" class="form-control" alt="no image" style="width:250px"/> -->
+                                                <img id="toolpic" title="No image" class="form-control " alt="no image" style="width:350px;display: none;" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer p-0">
+                            <input class="btn btn-primary" type="submit" align="left" value="ยืนยัน"></input>
+                            <button id="canceladdtool" type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row gx-4 gy-1">
+                <div class="col-xs-12 col-md-3">
+                    <div class="card">
+                        <div class="card-header bg-dark">
+                            <h4 style="color: white;" class="text-center">หมวดหมู่</h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                <li class="nav-item">
+                                    <a class="nav-link" type="button" href="/ownerproduct_fish" id="shop-fish-tab">ปลา</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" type="button" href="/ownerproduct_accessories" id="shop-decoration-tab">อุปกรณ์ตกแต่ง</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" type="button" href="/ownerproduct_tool" id="shop-tool-tab">อุปกรณ์ตู้ปลา</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-9">
+                    <div>
+                        <div class="tab-pane fade show active" id="shop-fish" role="tabpanel" aria-labelledby="shop-fish-tab">
+                            <div class="card">
+                                <div class="card-header bg-dark">
+                                    <h3>อุปกรณ์ตู้ปลา</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-1">
+                                        {%for row in toolproduct_data %}
+                                        <div class="col-md-3 mb-3 ">
+                                            <div class="card h-100">
+                                                <img src="{{row.5}}" class="card-img-top">
+                                                <div class="card-body">
+                                                    <p class="card-title">{{row.1}}</p>
+                                                    <p class="card-text">ราคา : {{row.2}} บาท</p>
+                                                    <p class="card-text">จำนวนคงเหลือ : {{row.3}}</p>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="d-grid gap-2">
+                                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modal_edit_tooldata{{row.0}}">แก้ไขข้อมูล</button>
+                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_delete_tool{{row.0}}">ลบ</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal fade" id="modal_edit_tooldata{{row.0}}" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modal_edit_tooldata{{row.0}}" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header p-2">
+                                                        <p class="modal-title" id="modal_edit_tooldata{{row.0}}">แก้ไขข้อมูล</p>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <form action="/edit_tool" id="modal_edit_tool" method="POST">
+                                                        <div class="modal-body p-1">
+                                                            <div class="row g-1">
+                                                                <div class="col-12">
+                                                                    <div class="row">
+                                                                        <div class="col-4 align-self-center">
+                                                                            <p>ชื่อสินค้า</p>
+                                                                        </div>
+                                                                        <div class="col-8">
+                                                                            <input name="edit_name" class="form-control" type="text" aria-label="default input" value="{{row.1}}">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="row">
+                                                                        <div class="col-4">
+                                                                            <p>ราคา</p>
+                                                                        </div>
+                                                                        <div class="col-8">
+                                                                            <input name="edit_price" class="form-control" type="text" aria-label="default input" value="{{row.2}}">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="row">
+                                                                        <div class="col-4">
+                                                                            <p>จำนวน</p>
+                                                                        </div>
+                                                                        <div class="col-8">
+                                                                            <input name="edit_amount" class="form-control" type="text" aria-label="default input" value="{{row.3}}">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="row">
+                                                                        <div class="col-4">
+                                                                            <p>รายละเอียดสินค้า</p>
+                                                                        </div>
+                                                                        <div class="col-8">
+                                                                            <textarea name="edit_description" class="form-control" type="text" aria-label="default input" value="">{{row.4}}</textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <input name="edit_id" type="hidden" value="{{row.0}}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer p-0">
+                                                            <input class="btn btn-primary" type="submit" align="left" value="ยืนยัน"></input>
+                                                            <button id="canceladdtool" type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal fade" id="modal_delete_tool{{row.0}}" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modal_delete_tool{{row.0}}" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <form action="{{url_for('delete_tool')}}" method="POST">
+                                                        <div class="modal-body">
+                                                            <p>คุณต้องการลบ {{row.1}} ใช่หรือไม่?</p>
+                                                            <input type="hidden" name="tool_id" value="{{row.0}}" />
+                                                        </div>
+                                                        <div class="modal-footer p-0">
+                                                            <button type="submit" class="btn btn-primary">ใช่</button>
+                                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ไม่</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {%endfor%} {{tool_pagination.links}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

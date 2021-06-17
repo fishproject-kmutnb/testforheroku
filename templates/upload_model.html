@@ -1,0 +1,30 @@
+{% extends "header_admin.html" %}
+
+{% block content %}
+
+<div class="position-absolute top-50 start-50 translate-middle">
+    <div class="card" style="width: 300px;">
+        <div class="card-body">
+            <form action="" method="POST" enctype="multipart/form-data">
+                <div class="row ">
+                    <div class="col-xs-12 col-md-12">
+                        <div class="row justify-content-center"> 
+                            <div class="col-xs-12 col-md-12">
+                                <input class="form-control" type="file" name="model" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-12">
+                        <div class="row justify-content-center"> 
+                            <div class="col-xs-12 col-md-12 pt-1 d-grid gap-2">
+                                <button style="width:100%;max-width:300px; margin-left: auto; margin-right: auto;" type="submit" class="btn btn-success" style="max-width:300px">upload</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

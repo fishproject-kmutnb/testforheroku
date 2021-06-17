@@ -1,0 +1,225 @@
+{% extends "header.html" %} {% block content %}
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="http://jqueryvalidation.org/files/demo/site-demos.css">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+    <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+    <script>
+        $(function() {
+            $("#register_seller").validate({
+                rules: {
+                    username: {
+                        required: true
+                    },
+                    firstname: {
+                        required: true
+                    },
+                    lastname: {
+                        required: true
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    phone: {
+                        required: true,
+                        number: true,
+                        maxlength: 10,
+                        minlength: 10
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6
+                    },
+                    password_confirm: {
+                        required: true,
+                        equalTo: "#password"
+                    },
+                    Store_name: {
+                        required: true,
+                    },
+                    address: {
+                        required: true
+                    },
+                },
+                messages: {
+                    username: {
+                        required: "กรุณากรอกชื่อผู้ใช้งาน",
+                    },
+                    firstname: {
+                        required: "กรุณากรอกชื่อของท่าน",
+                    },
+                    lastname: {
+                        required: "กรุณากรอกนามสกุลของท่าน",
+                    },
+                    email: {
+                        required: "กรุณากรอกอีเมลของท่าน",
+                        email: "กรุณากรอกอีเมลให้ถูกต้อง"
+                    },
+                    phone: {
+                        required: "กรุณากรอกเบอร์โทรศัพท์ของท่าน",
+                        number: "กรุณากรอกเบอร์ให้ถูกต้อง",
+                        maxlength: "กรุณากรอกเบอร์ให้ถูกต้อง",
+                        minlength: "กรุณากรอกเบอร์โทรศัพท์ให้ครบ"
+                    },
+                    password: {
+                        required: "กรุณากรอกรหัสผ่านของท่าน",
+                        minlength: "กรอกรหัสผ่านไม่ต่ำกว่า 6 คัว"
+                    },
+                    password_confirm: {
+                        required: "กรุณายืนยันรหัสผ่านของท่าน",
+                        equalTo: "ยืนยันรหัสผ่านให้ถูกต้อง"
+                    },
+                    Store_name: {
+                        required: "กรุณากรอกชื่อร้านค้าของท่าน",
+                    },
+                    address: {
+                        required: "กรุณากรอกที่อยู่ของท่าน"
+                    },
+                }
+            });
+        });
+    </script>
+    <script>
+        // $(function () {
+        //         $("#chkPassport").click(function () {
+        //             if ($(this).is(":checked")) {
+        //                 $(".seller").show();
+        //                 $("#AddPassport").hide();
+        //             } else {
+        //                 $(".seller").hide();
+        //                 $("#AddPassport").show();
+        //             }
+        //         });
+        //     });
+        //
+    </script>
+</head>
+<div class="container p-1 d-flex justify-content-center">
+    <div class="card p-2 bg-light text-dark " style="min-width:350px;width:500px">
+        <form class="form-horizontal" id="register_seller" action="{{url_for('register_seller')}}" method="POST">
+            <fieldset class="p-1">
+                <ul class="list-group list-group-flush">
+                    <div class="card-heade bg-dark p-1 justify-center">
+                        <h4 style="color: white;">ลงทะเบียนผู้ขาย</h4>
+                    </div>
+                    <li class="list-group-item">
+                        <div class="row gy-1">
+                            <div class="col-12">
+                                <div class="row">
+                                    <!-- Username -->
+                                    <label class="col-xs-2 col-md-4 col-form-label" for="username">ชื่อผู้ใช้งาน</label>
+                                    <div class="col-xs-4 col-md-7">
+                                        <input class="form-control" type="text" id="username" name="username" placeholder="" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <!-- Firstame -->
+                                    <label class="col-sm-5 col-md-4 col-form-label" for="firstname">ชื่อ</label>
+                                    <div class="col-sm-5 col-md-7">
+                                        <input class="form-control" type="text" id="firstname" name="firstname" placeholder="" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <!-- Surname -->
+                                    <label class="col-sm-5 col-md-4 col-form-label" for="lastname">นามสกุล</label>
+                                    <div class="col-sm-5 col-md-7">
+                                        <input class="form-control" type="text" id="" name="lastname" placeholder="" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <!-- E-mail -->
+                                    <label class="col-sm-5 col-md-4 col-form-label" for="email">อีเมล</label>
+                                    <div class="col-sm-5 col-md-7">
+                                        <input class="form-control" type="email" id="" name="email" placeholder="" required="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <!-- Phone -->
+                                    <label class="col-sm-5 col-md-4 col-form-label" for="phone">เบอร์โทรศัพท์</label>
+                                    <div class="col-sm-5 col-md-7">
+                                        <input class="form-control" type="text" id="" name="phone" placeholder="" required="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <!-- Password-->
+                                    <label class="col-sm-5 col-md-4 col-form-label" for="password">รหัสผ่าน</label>
+                                    <div class="col-sm-5 col-md-7">
+                                        <input class="form-control" type="password" id="password" name="password" placeholder="" required="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <!-- Password-->
+                                    <label class="col-sm-5 col-md-4 col-form-label" for="password_confirm">ยืนยันรหัสผ่าน</label>
+                                    <div class="col-sm-5 col-md-7">
+                                        <input class="form-control" type="password" id="password_confirm" name="password_confirm" placeholder="" required="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <label class="col-xs-5 col-md-4 col-form-label" for="Store_name">ชื่อร้านค้า</label>
+                                    <div class="col-xs-5 col-md-7">
+                                        <input class="form-control" type="text" id="" name="Store_name" placeholder="" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <label class="col-xs-5 col-md-4 col-form-label" for="address">ที่อยู่ร้าน</label>
+                                    <div class="col-xs-5 col-md-7">
+                                        <input class="form-control" type="text" id="" name="address" placeholder="" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <div class="card-heade bg-dark p-1 justify-center">
+                        <h4 style="color: white;">ข้อมูลอื่นๆ</h4>
+                    </div>
+                    <li class="list-group-item">
+                        <div class="row gy-1">
+                            <div class="col-12">
+                                <div class="row">
+                                    <label class="col-xs-5 col-md-4 col-form-label" for="Line">Line</label>
+                                    <div class="col-xs-5 col-md-7">
+                                        <input class="form-control" type="text" id="Line" name="Line" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <label class="col-xs-5 col-md-4 col-form-label" for="Facebook">Facebook</label>
+                                    <div class="col-xs-5 col-md-7">
+                                        <input class="form-control" type="text" id="Facebook" name="Facebook" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <div class="row pt-2 align-self-end">
+                        <!-- Button -->
+                        <div class="col-12">
+                            <button class="btn btn-success">สมัครสมาชิก</button>
+                        </div>
+                    </div>
+                </ul>
+            </fieldset>
+        </form>
+    </div>
+</div>
+{% endblock %}

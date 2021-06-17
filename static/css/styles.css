@@ -1,0 +1,98 @@
+@import 'https://fonts.googleapis.com/css?family=Kanit|Prompt';
+p {
+    margin-bottom: 0.5rem;
+}
+
+h6 {
+    color: white;
+}
+
+h3 {
+    color: white;
+}
+
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.btn,
+label,
+.col-form-label,
+span,
+input,
+textarea,
+table {
+    font-family: 'Kanit', sans-serif;
+}
+
+.image-preview {
+    width: 300px;
+    min-height: 100px;
+    margin-top: 5px;
+    /*Default text*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #cccccc;
+}
+
+.image-preview__image {
+    display: none;
+    width: 100%;
+}
+
+#custom-button {
+    padding: 10px;
+    color: white;
+    background-color: #009578;
+    border: 1px solid #007;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#custom-button.hover {
+    background-color: #00b28f;
+}
+
+#custom-text {
+    margin-left: 10px;
+    font-family: sans-serif;
+    color: #aaa;
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    /* Light grey */
+    border-top: 16px solid #3498db;
+    /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    left: 50%;
+    margin-left: -4em;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading{
+    position: fixed;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background-color:rgba(0, 0, 0, 0.3);
+    text-align: center
+}

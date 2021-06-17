@@ -1,0 +1,85 @@
+{% extends "header_user.html" %} 
+
+{% block content %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/styles.css') }}">
+    <script>
+        window.setTimeout(function() {
+            $(".toast").fadeTo(500, 0).slideUp(500, function() {
+                $(this).remove();
+            });
+        }, 2000);
+    </script>
+</head>
+<div class="container p-1 my-0">
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %}
+    <!-- <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert" style="margin-bottom: 0;">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div> -->
+    <div aria-live="polite" aria-atomic="true" class="bg-dark position-relative">
+        <div class="toast-container position-absolute p-3 top-0 start-50 translate-middle-x" style="z-index: 5; color:white;">
+            <div id="liveToast" class="toast fade show bg-{{ category }}" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-body text-center" style="z-index: 5; color:white;">
+                    {{ message }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %} {% endif %} {% endwith %}
+</div>
+<div class="container my-0 bg">   
+    <div class="card-body row gy-2 gx-2">
+        <div class="col-xs-12 col-md-12">
+            <div class="card-header pb-1 border-bottom bg-dark">
+                <h3>ตะกร้า</h3>
+            </div>
+            <table class="table table-hover table-light" style="font-size:14px">
+                <thead align="center" class="table-dark">
+                    <tr>
+                        <th style="width:200px;"><h6>รูป</h6></th>
+                        <th style="width:500px;"><h6>ชื่อ</h6></th>
+                        <th><h6>ราคา</h6></th>
+                        <th style="width:170px;"><h6>จำนวน</h6></th>
+                        <th style="width:60px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for row in basket %}
+                    <tr align="center">
+                        <td><img src="{{row[6]}}" style="width: 50%; height:50; display: block; margin-left: auto; margin-right: auto;"></td>
+                        <td><h5>{{row[2]}}</h5></td>
+                        <td><h5>{{row[3]}} บาท</h5></td>
+                        <td><h5>x {{row[5]}}</h5></td>
+                        <form action="delete_basket" method="POST">
+                            <input type="hidden" class="form-control" id="product_name" name="id" value="{{row[0]}}" >
+                            <td>
+                                <button type="submit" class="btn btn-light mx-2">
+                                    <i style="color:red" class="fas fa-trash-alt">
+                                    </i>
+                                </button>
+                            </td>
+                        </form>                           
+                    </tr>
+                    {%endfor%}
+                    <tr align="center" class="table-dark">
+                        <td><h6>รวม</h6></td>
+                        <td></td>
+                        <td><h6>{{total}} บาท</h6></td>
+                        <td>
+                            <form action="sendmail" method="POST">
+                                <input type="text" class="form-control" id="username" name="username" value="{{basket[1]}}" hidden>
+                                <input type="text" class="form-control" id="total" name="total" value="{{total}}" hidden>
+                                <input type="text" class="form-control" id="status" name="status" value="waiting" hidden>
+                                <button type="submit" class="btn btn-success">สั่งซื้อ</button>
+                            </form>                               
+                        </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

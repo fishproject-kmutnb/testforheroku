@@ -1,0 +1,257 @@
+{% extends "header_seller.html" %} {% block content %}
+
+<head>
+    <style>
+
+        .image-preview{
+            min-width: 300px;
+            max-width: 300px;
+            min-height: 100px;
+            border: 2px solid #dddddd;
+            margin-top: 15px;
+
+            /*Default text*/
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #cccccc;
+            margin-left: auto; 
+            margin-right: auto;
+        }
+        .image-preview__image{
+            display: none;
+            width: 100%;
+
+        }
+
+        .custom-button{
+            padding: 3px;
+            color:white;
+            background-color: #009578;
+            /* border: 1px solid #007; */
+            border-radius: 5px;
+            cursor: pointer;
+            
+        }
+
+        #custom-button.hover{
+            background-color:#00b28f;
+        }
+
+        #custom-text{
+            margin-left: 10px;
+            font-family:sans-serif;
+            color: 
+            #aaa;
+        }
+    </style>
+
+    <link rel="stylesheet" href="http://jqueryvalidation.org/files/demo/site-demos.css">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>
+    <script src="http://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>
+    <script type="application/x-javascript">
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- image input -->
+    <script>
+        function fishreadURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $("#fishpic")
+                        .attr("src", e.target.result)
+                        // .width(200)
+                        // .height(200);
+                    $("#fishpic").show()
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function decorationreadURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $("#decpic")
+                        .attr("src", e.target.result)
+                        // .width(200)
+                        // .height(200);
+                    $("#decpic").show()
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function toolreadURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $("#toolpic")
+                        .attr("src", e.target.result)
+                        // .width(200)
+                        // .height(200);
+                    $("#toolpic").show()
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function editprofilereadURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $("#profilepic")
+                        .attr("src", e.target.result)
+                        // .width(300)
+                        // .height(300);
+                    $("#profilepic").show()
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+    <!-- validate -->
+    <script>
+        $(function() {
+            var modal_slip = $("#modal_slip").validate({
+                rules: {
+                    slip_pic: {
+                        required: true,
+                    }
+                },
+                messages: {
+                    slip_pic: {
+                        required: "กรุณาใส่รูปภาพสลิป"
+                    }
+                }
+            });
+            $("#cancelslip").click(function() {
+                console.log("OK")
+                modal_picprofile.resetForm();
+            });
+        });
+    </script>
+
+    <script>
+        window.setTimeout(function() {
+            $(".toast").fadeTo(500, 0).slideUp(500, function() {
+                $(this).remove();
+            });
+        }, 3000);
+    </script>
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/styles.css') }}">
+</head>
+<div class="container p-1 my-0" >
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %} {% for category, message in messages %}
+    <!-- <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert" style="margin-bottom: 0;">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div> -->
+    <div aria-live="polite" aria-atomic="true" class="bg-dark position-relative">
+        <div class="toast-container position-absolute p-3 top-0 start-50 translate-middle-x" style="z-index: 5; color:white;">
+            <div id="liveToast" class="toast fade show bg-{{ category }}" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-body text-center" style="z-index: 5; color:white;">
+                    {{ message }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %} {% endif %} {% endwith %}
+</div>
+<div class="container my-0 " style="padding-left: 0; padding-right: 0;">
+    <div class="card">
+        <div class="card-header">
+            <h5>ประวัติการขาย</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-hover" style="font-size:14px">
+                <thead align="center">
+                    <tr>
+                        <th >วันที่สั่งซื้อ</th>
+                        <th>ผู้สั่ง</th>
+                        <th>รายการสินค้า</th>
+                        <th>ราคา</th>
+                        <th>สถานะ</th>
+                        <th style="width: 9%;"></th>
+                        <th style="width: 11%;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in history_sell_data %}
+                        <tr>
+                            <td align="center">{{row.4}}</td>
+                            <td align="center">{{row.1}}</td>
+                            <td align="center">{{row.2}}</td>
+                            <td align="center">{{row.3}} บาท</td>
+                            <td align="center">{{row.8}}</td>
+                            <td>
+                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirmproduct{{row.0}}" {{row.9}}>
+                                    อนุมัติ
+                                </button>
+                                <div class="modal fade" id="confirmproduct{{row.0}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmproductropLabel" aria-hidden="true" {{row.9}}>
+                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">อนุมัติคำสั่งซื้อ</h5>
+                                        </div>
+                                        <form action="/confirmproduct" method="POST">
+                                            <div class="modal-body">
+                                                <p>ต้องการอนุมัติคำสั่งซื้อ {{row.2}} ใช่ หรือไม่</p>
+                                                <input type="hidden" name="status" value="confirm">
+                                                <input type="hidden" name="id" value="{{row.0}}">
+                                                <input type="hidden" name="buyer" value="{{row.1}}">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                                            </div>
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#checkslip{{row.0}}">
+                                    ตรวจสอบสลิป
+                                </button>
+                                <div class="modal fade" id="checkslip{{row.0}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="checkslipropLabel" aria-hidden="true" {{row.9}}>
+                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">ตรวจสอบสลิป</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img src="{{row.10}}" class="form-control mx-auto" onerror="this.style.display = 'none';" alt="ไม่พบสลิป" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {{history_sell_pagination.links}}
+            <div class="mx-auto text-end">
+                <a class="btn btn-primary" href="/profile">
+                    ข้อมูลส่วนตัว
+                </a>
+                <a class="btn btn-primary" href="/">
+                    หน้าหลัก
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

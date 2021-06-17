@@ -1,0 +1,200 @@
+{% extends "header_admin.html" %}
+<script>
+  $(document).ready(function(){
+    // $("#hide").click(function(){
+    //   $("p").hide();
+    // });
+    // $("#show").click(function(){
+    //   $("p").show();
+    // });
+  });
+</script>
+{% block content %}
+<div class="container p-2" >
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="table-light">
+            <th>ชื่อผู้ใช้งาน</th>
+            <th>ชื่อ</th>
+            <th>นามสกุล</th>
+            <th>อีเมล</th>
+            <th>เบอร์โทรศัพท์</th>
+            <th>ที่อยู่ร้าน</th>
+            <th>ชื่อร้านค้า</th>
+            <th>Line</th>
+            <th>Facebook</th>
+            <th>แก้ไข</th>
+            <th>สถานะ</th>
+          </thead>
+          {% for row in shop_data_list %}
+          <tbody>
+            <tr>
+              <td>{{row.0}}</td>
+              <td>{{row.1}}</td>
+              <td>{{row.2}}</td>
+              <td>{{row.3}}</td>
+              <td>{{row.4}}</td>
+              <td>{{row.5}}</td>
+              <td>{{row.10}}</td>
+              <td>{{row.6}}</td>
+              <td>{{row.7}}</td>
+              <td>
+                <p data-placement="top">
+                  <button class="btn btn-primary btn-xs" data-bs-toggle="modal" data-bs-target="#edit{{row.0}}">
+                    <span class="glyphicon glyphicon-pencil">แก้ไข</span>
+                  </button>
+                </p>
+              </td>
+              <td>
+                <p data-placement="top" data-bs-toggle="modal" data-bs-target="#status{{row.0}}">
+                  <button class="status btn btn-{{row.13}}" type="button">
+                    {{row.12}}
+                  </button>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+          <div class="modal fade" id="edit{{row.0}}" tabindex="-1" data-bs-backdrop="static" aria-labelledby="edit{{row.0}}" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header bg-warning p-2">
+                  <h5 class="modal-title" id="edit{{row.0}}">แก้ไขข้อมูล</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <div class="row g-1">
+                        <div class="col-12">
+                          <div class="row">
+                            <div class="col-4 align-self-center">
+                                <p>ชื่อผู้ใช้งาน</p>
+                            </div>
+                            <div class="col-8">
+                                <input name="seller_id" class="form-control" type="text" aria-label="default input" value="{{row.0}}">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="row">
+                            <div class="col-4 align-self-center">
+                                <p>ชื่อ</p>
+                            </div>
+                            <div class="col-8">
+                                <input name="seller_id" class="form-control" type="text" aria-label="default input" value="{{row.1}}">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="row">
+                            <div class="col-4 align-self-center">
+                                <p>นามสกุล</p>
+                            </div>
+                            <div class="col-8">
+                                <input name="seller_id" class="form-control" type="text" aria-label="default input" value="{{row.2}}">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="row">
+                            <div class="col-4 align-self-center">
+                                <p>อีเมล</p>
+                            </div>
+                            <div class="col-8">
+                                <input name="seller_id" class="form-control" type="text" aria-label="default input" value="{{row.3}}">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="row">
+                            <div class="col-4 align-self-center">
+                                <p>เบอร์โทรศัพท์</p>
+                            </div>
+                            <div class="col-8">
+                                <input name="seller_id" class="form-control" type="text" aria-label="default input" value="{{row.4}}">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="row">
+                            <div class="col-4 align-self-center">
+                                <p>ที่อยู่ร้าน</p>
+                            </div>
+                            <div class="col-8">
+                                <input name="seller_id" class="form-control" type="text" aria-label="default input" value="{{row.5}}">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="row">
+                            <div class="col-4 align-self-center">
+                                <p>ชื่อร้านค้า</p>
+                            </div>
+                            <div class="col-8">
+                                <input name="seller_id" class="form-control" type="text" aria-label="default input" value="{{row.10}}">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="row">
+                            <div class="col-4 align-self-center">
+                                <p>Line</p>
+                            </div>
+                            <div class="col-8">
+                                <input name="seller_id" class="form-control" type="text" aria-label="default input" value="{{row.6}}">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="row">
+                            <div class="col-4 align-self-center">
+                                <p>Facebook</p>
+                            </div>
+                            <div class="col-8">
+                                <input name="seller_id" class="form-control" type="text" aria-label="default input" value="{{row.7}}">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="modal-footer">
+                  <a type="button" class="btn btn-primary">ยืนยัน</a>
+                  <a type="button" href="/shop_pages" class="btn btn-danger">ยกเลิก</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal fade" id="status{{row.0}}" tabindex="-1" data-bs-backdrop="static" aria-labelledby="status{{row.0}}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-body">
+                  คุณต้องการเปลี่ยนสถานะร้านค้า {{row.10}} ใช่หรือไม่
+                </div>
+                <div class="modal-footer p-1">
+                  <form action="/status_shop" method="POST">
+                    <input type="hidden" name="status_color" value="{{row.13}}">
+                    <input type="hidden" name="seller_id" value="{{row.0}}">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">ไม่</button>
+                    <button type="submit" class="btn btn-primary">ใช่</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </table>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          {{shop_pagination.links}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

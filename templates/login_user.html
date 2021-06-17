@@ -1,0 +1,60 @@
+{% extends "header.html" %}
+
+{% block content %}
+<head>
+  <meta charset="utf-8">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+// $(function () {
+//         $("#chkPassport").click(function () {
+//             if ($(this).is(":checked")) {
+//                 $(".seller").show();
+//                 $("#AddPassport").hide();
+//             } else {
+//                 $(".seller").hide();
+//                 $("#AddPassport").show();
+//             }
+//         });
+//     });
+  </script>
+
+</head>
+<div class="container p-1 border d-flex justify-content-center">
+  <!-- <nav class="d-flex justify-content-center navbar navbar-expand-lg navbar-dark bg-dark border-bottom justify-content-center">
+    <h4 style="color: white;">ลงทะเบียน</h4>
+  </nav> -->
+  <div class="card p-2 bg-light text-dark " style="min-width:350px;width:400px">
+    <form class="form-horizontal" action="{{url_for('login_user')}}" method="POST">
+      <fieldset class="p-1">
+        <ul class="list-group list-group-flush">
+          <div class="card-heade bg-dark p-1 justify-center">
+            <h4 style="color: white;">เข้าสู่ระบบผู้ใช้งาน</h4>
+          </div>
+          <li class="list-group-item">
+            <div class="row">
+              <!-- Username -->
+              <label class="col-xs-2 col-md-4 col-form-label" for="username">ชื่อผู้ใช้งาน</label>
+              <div class="col-xs-4 col-md-7">
+                <input  type="text" id="username" name="username" placeholder="" required="">
+              </div>
+            </div>
+            <div class="row">
+              <!-- Password -->
+              <label class="col-sm-5 col-md-4 col-form-label" for="password">รหัสผ่าน</label>
+              <div class="col-sm-5 col-md-7">
+                <input type="password" id="password" name="password" placeholder=""  required="">
+              </div>
+            </div>
+          </li>
+          <div class="row pt-2 align-self-end">
+            <!-- Button -->
+            <div class="col-12">
+              <button class="btn btn-success">เข้าสู่ระบบ</button>
+            </div>
+          </div>
+        </ul>
+      </fieldset>  
+    </form>
+  </div>
+</div>
+{% endblock %}

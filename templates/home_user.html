@@ -1,0 +1,122 @@
+{% extends "header_user.html" %} {% block content %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/styles.css') }}">
+</head>
+<div class="container p-2 my-0">
+    <div class="p-4 bg-dark rounded center text-center">
+        <h1 style="color: cyan;">W e l c o m e</h1>
+        <h4 style="color: white;">t o</h4>
+        <h1 style="color: rgb(92, 92, 228);">O r a m e n t a l f i s h</h1>
+    </div>
+</div>
+<div class="container-lg">
+    <div class="row g-1">
+        <div class="col-xs-12 col-md-6 ">
+            <div class="row g-1">
+                <div class="col-md-12">
+                    <div class="card bg-info">
+                        <div class="card-header">
+                            <h4 class="text-center"><i class="fas fa-star"></i>สินค้าปลายอดนิยม<i
+                                    class="fas fa-star"></i></h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center g-1">
+                                {%for row in search_count %}
+                                <div class="col-md-4 mb-3">
+                                    <div class="card">
+                                        <img src={{row.6}} class="card-img-top" width="80px" height="120px">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{row.1}}</h5>
+                                            <p class="card-text">ราคา : {{row.3}} บาท</p>
+                                            <p class="card-text">จำนวนคงเหลือ : {{row.4}} ตัว</p>
+                                            <p>ผู้ขาย :
+                                                <a href="shop_fish/{{row.2}}" style="color: rgb(4, 4, 255);"><b>
+                                                        {{row.9}}</b></a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {%endfor%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card bg-info">
+                        <div class="card-header">
+                            <h4 class="text-center"><i class="fas fa-shopping-basket"></i>แหล่งซื้อขาย<i
+                                    class="fas fa-shopping-basket"></i>
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-1">
+                                {%for row in seller_data %}
+                                <div class="col-12">
+                                    <a id="{{row.0}}" class="card btn" href="shop_fish/{{row[0]}}" style="padding: 0;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-4">
+                                                <img src="{{row.10}}" class="card-img align-self-center" width="100px"
+                                                    height="150px">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{row.9}}</h5>
+                                                    <p class="card-text">{{row.5}}</p>
+                                                    <p class="card-text">
+                                                        <medium class="text-muted">{{row.3}}</medium>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                {%endfor%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            <div class="card bg-info">
+                <div class="card-header">
+                    <h4 class="text-center"><i class="fas fa-fire"></i>ประกาศขายปลาล่าสุด<i class="fas fa-fire"></i>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row d-flex justify-content-center g-2">
+                        {%for row in lastest_product %}
+                        <a id="{{row.2}}" class="card btn" href="shop_fish/{{row.2}}">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <img src="{{row.6}}" class="card-img align-self-center" width="100px"
+                                        height="150px">
+                                    <img style="
+                                        position: absolute;
+                                        top: -30px;
+                                        left: -30px;                                   "
+                                        src="https://img.icons8.com/bubbles/100/000000/new.png" />
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{row.1}}</h5>
+                                        <p class="card-text">{{row.5}}</p>
+                                        <p class="card-text">
+                                            <medium class="text-muted">ผู้ขาย : {{row.9}}</medium>
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        {%endfor%}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends "header.html" %} {% block content %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/styles.css') }}">
+    
+</head>
+<div class="container p-3 my-1">
+    <div class="row g-5">
+        <div class="col-12 ">
+            <div class="card bg-dark">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 align-self-center">
+                            <img src="../{{seller_shop[10]}}" style="width: 50%; height:50; display: block; margin-left: auto; margin-right: auto;">
+                        </div>
+                        <div class="col-md-7">
+                            <h3 style="color: white;" class="p-1">{{seller_shop[9]}}</h3>
+                            <h6>รายละเอียด</h6>
+                            <h6><i class="fas fa-user"></i> เจ้าของร้าน : {{seller_shop[1]}} {{seller_shop[2]}}</h6>
+                            <h6><i class="fas fa-map-marked-alt"></i> ที่อยู่ : {{seller_shop[5]}}</h6>
+                            <h6><i class="fas fa-phone"></i> เบอร์โทรศัพท์ : {{seller_shop[4]}}</h6>
+                            <h6><i class="fas fa-envelope"></i> E-mail : {{seller_shop[3]}}</h6>
+                            <h6><i class="fab fa-facebook"></i> Facebook : {{seller_shop[7]}}</h6>
+                            <h6><i class="fab fa-line"></i> Line : {{seller_shop[6]}}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row gx-4 gy-1">
+                <div class="col-xs-12 col-md-3">
+                    <div class="card">
+                        <div class="card-header bg-dark">
+                            <h4 style="color: white;" class="text-center">หมวดหมู่</h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                <li class="nav-item">
+                                    <a class="nav-link" type="button" href="/shop_fish/{{seller_shop[0]}}" id="shop-fish-tab">ปลา</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" type="button" href="/shop_accessories/{{seller_shop[0]}}" id="shop-decoration-tab">อุปกรณ์ตกแต่ง</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" type="button" href="/shop_tool/{{seller_shop[0]}}" id="shop-tool-tab">อุปกรณ์ตู้ปลา</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-9">
+                    <div>
+                        <div class="tab-pane fade show active" id="shop-fish" role="tabpanel" aria-labelledby="shop-fish-tab">
+                            <div class="card">
+                                <div class="card-header bg-dark">
+                                    <h3>อุปกรณ์ตกแต่ง</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        {%for row in accessoriesproduct_data %}
+                                        <div class="col-xs-3 col-sm-3 col-md-3 mb-3">
+                                            <div class="card h-100">
+                                                <img src="../{{row.5}}" class="card-img-top">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{row.1}}</h5>
+                                                    <p class="card-text">ราคา : {{row.2}} บาท</p>
+                                                    <p class="card-text">จำนวนคงเหลือ : {{row.3}} ชิ้น</p>                                                </div>
+                                                <div class="card-footer">
+                                                    <div class="d-grid gap-2">
+                                                        <button type="button" data-bs-toggle="modal" data-bs-target="#fishdetail{{row.0}}" class="btn btn-warning">รายละเอียด</button>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="fishdetail{{row.0}}" tabindex="-1" aria-labelledby="fishdetail{{row.0}}" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <img src="../{{row.5}}" class="card-img-top" />
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <h5>รายละเอียด</h5>
+                                                                <p>{{row.4}}</p>
+                                                            </div>
+                                                            <div class="modal-footer ">
+                                                                <button type="button" class=" btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#fishorder{{row.0}}" class="btn btn-warning">สั่งซื้อ</button>
+                                                                <button type="button" class=" btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="fishorder{{row.0}}" tabindex="-1" aria-labelledby="fishorder{{row.0}}" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <form action="{{ url_for('add_basket_accessories') }}" method="POST">
+                                                                <div class="modal-header">
+                                                                    <h5>สั่งซื้อ</h5>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <label>จำนวนที่ต้องการ : </label>
+                                                                    <input type="text" name="count" value="">
+                                                                    <input type="hidden" name="accessories_id" value="{{row.0}}"/>
+                                                                </div>
+                                                                <div class="modal-footer ">
+                                                                    <div class="">
+                                                                        <button type="submit" class=" btn btn-primary">ยืนยันสั่งซื้อ</button>
+                                                                        <button type="button" class=" btn btn-danger" data-bs-dismiss="modal">ยกเลิก</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {%endfor%} {{accessories_pagination.links}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
